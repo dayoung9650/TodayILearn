@@ -56,7 +56,7 @@
 * 아래처러 FileFilter로 감싸지 않고 바로 hidden 메소드를 넘겨서 간단히 사용하 수 있다.
 * 자바 8에서는 더 이상 메소드는 이급값이 아닌 일급값이다.
 
-```
+```java
 File[] hiddenFileds = new File(".").listFiles(new FileFilter(){
   
  public boolean accept(File file){
@@ -70,4 +70,4 @@ File[] hiddenFiles = new File(".").listFiles(File::isHidden);
 
 ## 람다 : 익명함수
 * 익명 함수도 값으로 취급할 수 있다 (int x) -> x + 1
-* 프레디케이트 : 
+* 프레디케이트 : 인수로 
