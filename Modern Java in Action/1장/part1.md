@@ -5,7 +5,7 @@
 * 스레드풀, 병렬 실행 컬렉션
 
 자바7 
-* 병렬 실행에 도움으 주 수 있는 포크/조인 프레임워크 제공
+* 병렬 실행에 도움으 줄 수 있는 포크/조인 프레임워크 제공
 
 
 자바 8
@@ -65,7 +65,9 @@ File[] hiddenFileds = new File(".").listFiles(new FileFilter(){
 });
 
 File[] hiddenFiles = new File(".").listFiles(File::isHidden);
+
 ```
 
-## 람다 : 이
-  
+## 람다 : 익명함수
+* 익명 함수도 값으로 취급할 수 있다 (int x) -> x + 1
+* 프레디케이트 : 
