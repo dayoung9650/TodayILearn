@@ -1,3 +1,5 @@
+
+
 # 스트림 활용
 
 데이터를 어떻게 처리할지는 스트림 API 가 관리하므로 편리하게 데이터 관련 작업을 할 수 있음
@@ -407,4 +409,73 @@ Stream<String> values = Stream.of("config" , "home", "user")
 ​		
 
 ### 배열로 스트림 만들기
+
+```java
+int[] numbers = {2,3,5,7,11,13};
+int su = Arrays.stream(numbers).sum();
+```
+
+### 파일로 스트림 만들기
+
+* Files.lines 는 주어진 파일의 행 스트림을 문자열로 반환
+
+```java
+long uniqueWords = 0;
+//스트림은 자원을 자동으로 해제할 수 있는 autoCloseable 이므로 try catch 가 필요없다
+try(Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCharSet())){ 
+  uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" "))) //고유 단어 수 계산
+    									.distinct() // 중복 제거
+     									.count();
+} catch(IOException e){
+  // 파일 열다가 오류
+}
+```
+
+### 함수로 무한 스트림 만들기
+
+### iterate
+
+* 초기값, 기존 결과에 의존해서 순차적으로 연산 수행
+* 무한 스트림 
+* 언바운드 스트림
+* 프레디케이트 지원
+
+```java
+Stream.iterate(0, n-> n+2)
+  			.limit(10)
+  			.forEach(System.out::println)
+```
+
+```java
+Stream.iterate(0, n -> n<100, n-> n+4)
+  			.limit(10)
+  			.forEach(System.out::println)
+```
+
+
+
+### 피보나치 수열 집합 만들기
+
+```java
+Stream.iterate(new int[]{0,1}, t -> new int[]{t[1], t[0]+ + t[1]})
+  		.limit(20)
+  		.forEach(t -> System.out::println("(" + t[0] + ", " + t[1] + ")"))
+```
+
+### generate
+
+* 값을 연속적으로 계산하지 않음
+* Supplier<T> 를 인수로 받아 새로운 값을 생성함
+
+```java
+Stream.generate(Math::random)
+  		.limit(5)
+  		.forEach(System.out::println)
+```
+
+* 박싱 문제 피할 수 있음
+
+```java
+IntStream ones = IntStream.generate(() -> 1);
+```
 
